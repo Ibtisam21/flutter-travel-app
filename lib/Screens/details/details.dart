@@ -28,7 +28,6 @@ class DetailsScreen extends StatelessWidget {
       body: Stack(
         children: [
           PlaceImage(place: place),
-
           PlaceInformation(place: place)
         ],
       ),

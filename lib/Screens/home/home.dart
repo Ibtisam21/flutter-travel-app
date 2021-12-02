@@ -13,8 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: buildAppBar(
-          context,
+      appBar: buildAppBar(context,
         title: 'Discover',
         leading: HamburgerMenu(),
         actions: [

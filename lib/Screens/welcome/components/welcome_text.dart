@@ -39,7 +39,7 @@ class WelcomeText extends StatelessWidget {
 
           WelcomeButton(
             tapEvent: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           )
         ],

@@ -8,7 +8,7 @@ class HamburgerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: ClipOval(child: Image.asset('assets/images/menu.png')),
+      icon: ClipOval(child: Image.asset('assets/images/menu.png', width: 30,)),
       onPressed: () {}
     );
   }

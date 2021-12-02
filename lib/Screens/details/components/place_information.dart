@@ -66,8 +66,8 @@ class PlaceInformation extends StatelessWidget {
                     Spacer(),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CalenderTime()),
-                        );
+                        if(place.price!="Free")
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CalenderTime()));
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -80,7 +80,7 @@ class PlaceInformation extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                           child: Text(
-                            'Book Slot',
+                            place.price=="Free"? "Free":"Book Slot",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

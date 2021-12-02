@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/Models/Place.dart';
+import 'package:travel_app/Screens/details/details.dart';
 import 'package:travel_app/Screens/home/components/place_card.dart';
 import 'package:travel_app/constants.dart';
 import 'package:travel_app/responsive.dart';
@@ -36,7 +37,12 @@ class _PopularPlacesState extends State<PopularPlaces> {
                 initialPage: 0
               ),
               itemCount: demoPlaces.length,
-              itemBuilder: (context, index) => PlaceCard(place: demoPlaces[index])
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(place: demoPlaces[index]))),
+                    child: Hero(tag: demoPlaces[index].id, child: PlaceCard(place: demoPlaces[index]))
+                );
+              }
             ),
           ),
 

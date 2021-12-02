@@ -3,7 +3,9 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:travel_app/Screens/details/components/bookedevent.dart';
 import 'package:travel_app/Screens/home/home.dart';
 
+import '../../../constants.dart';
 import '../../../main.dart';
+import '../../../responsive.dart';
 import 'animate.dart';
 
 class CalenderTime extends StatefulWidget {
@@ -148,14 +150,7 @@ class _CalenderTimeState extends State<CalenderTime> {
             icon: Icon(Icons.arrow_back, color: Colors.black,)),
       ),
         backgroundColor: Colors.white,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => EventBooked(),
-            ),
-            );
-          },
-          child: Icon(Icons.arrow_forward_ios),
-        ),
+
         // body: NestedScrollView(
           // headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           //   return <Widget>[
@@ -175,213 +170,258 @@ class _CalenderTimeState extends State<CalenderTime> {
           //   ];
           // },
           body: SafeArea(
-              child: Padding(
-               padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                   FadeAnimation(1, Row(
+                  Padding(
+                   padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("December 2021"),
-                      Spacer(),
-                      IconButton(
-                        padding: EdgeInsets.all(0),
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_drop_down_circle_outlined, color: Colors.grey.shade700,),
-                      )
-                  ],
-                  )),
-                  Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    border: Border.all(width: 1.5, color: Colors.grey.shade200),
-                  ),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _days.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return FadeAnimation((1 + index) / 6, GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedDay = _days[index][0];
-                            });
-                          },
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            width: 62,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: _selectedDay == _days[index][0] ? Colors.blue.shade100.withOpacity(0.5) : Colors.blue.withOpacity(0),
-                              border: Border.all(
-                                color: _selectedDay == _days[index][0] ? Colors.blue : Colors.white.withOpacity(0),
-                                width: 1.5,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(_days[index][0].toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                                SizedBox(height: 10,),
-                                Text(_days[index][1], style: TextStyle(fontSize: 16),),
-                              ],
-                            ),
-                          ),
-                        ));
-                      }
-                  ),
-                ),
-                SizedBox(height: 10,),
-                FadeAnimation(1.2, Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    border: Border.all(width: 1.5, color: Colors.grey.shade200),
-                  ),
-                  child: ScrollablePositionedList.builder(
-                      itemScrollController: _scrollController,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _hours.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedHour = _hours[index];
-                            });
-                          },
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: _selectedHour == _hours[index] ? Colors.orange.shade100.withOpacity(0.5) : Colors.orange.withOpacity(0),
-                              border: Border.all(
-                                color: _selectedHour == _hours[index] ? Colors.orange : Colors.white.withOpacity(0),
-                                width: 1.5,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(_hours[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
-                              ],
-                            ),
-                          ),
-                        );
-                      }
-                  ),
-                )),
-                SizedBox(height: 40,),
-                FadeAnimation(1.2, Text("Terms and Conditions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)),
-                Divider(
-                  height: 20,
-                  thickness: 2,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Colors.black,
-                ),
-                SizedBox(height: 10,),
-                Container(
-                    height: 130,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 1.5, color: Colors.grey.shade200),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                       FadeAnimation(1, Row(
                         children: [
-                          SizedBox(height: 10),
-                          FadeAnimation(1.2, Text("* Everyone should be vaccinated and show their vaccination on arrival")),
-                          SizedBox(height: 5,),
-                          FadeAnimation(1.2, Text("* You should reach on Time")),
-                          SizedBox(height: 5,),
-                          FadeAnimation(1.2, Text("* Food is not allowed")),
-                          SizedBox(height: 5,),
-                        ],
+                          Text("December 2021"),
+                          Spacer(),
+                          IconButton(
+                            padding: EdgeInsets.all(0),
+                            onPressed: () {},
+                            icon: Icon(Icons.arrow_drop_down_circle_outlined, color: Colors.grey.shade700,),
+                          )
+                      ],
+                      )),
+                      Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        border: Border.all(width: 1.5, color: Colors.grey.shade200),
+                      ),
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _days.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return FadeAnimation((1 + index) / 6, GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedDay = _days[index][0];
+                                });
+                              },
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                width: 62,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: _selectedDay == _days[index][0] ? Colors.blue.shade100.withOpacity(0.5) : Colors.blue.withOpacity(0),
+                                  border: Border.all(
+                                    color: _selectedDay == _days[index][0] ? Colors.blue : Colors.white.withOpacity(0),
+                                    width: 1.5,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(_days[index][0].toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                    SizedBox(height: 10,),
+                                    Text(_days[index][1], style: TextStyle(fontSize: 16),),
+                                  ],
+                                ),
+                              ),
+                            ));
+                          }
                       ),
                     ),
-                    // child: ListView.builder(
-                    //   scrollDirection: Axis.horizontal,
-                    //   itemCount: _repeat.length,
-                    //   itemBuilder: (context, index) {
-                    //     return GestureDetector(
-                    //       onTap: () {
-                    //         setState(() {
-                    //           _selectedRepeat = index;
-                    //         });
+                    SizedBox(height: 10,),
+                    FadeAnimation(1.2, Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        border: Border.all(width: 1.5, color: Colors.grey.shade200),
+                      ),
+                      child: ScrollablePositionedList.builder(
+                          itemScrollController: _scrollController,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _hours.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedHour = _hours[index];
+                                });
+                              },
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: _selectedHour == _hours[index] ? Colors.orange.shade100.withOpacity(0.5) : Colors.orange.withOpacity(0),
+                                  border: Border.all(
+                                    color: _selectedHour == _hours[index] ? Colors.orange : Colors.white.withOpacity(0),
+                                    width: 1.5,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(_hours[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                      ),
+                    )),
+                    SizedBox(height: 40,),
+                    FadeAnimation(1.2, Text("Terms and Conditions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)),
+                    Divider(
+                      height: 20,
+                      thickness: 2,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black,
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 1.5, color: Colors.grey.shade200),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 10),
+                              FadeAnimation(1.2, Text("* Everyone should be vaccinated and show their vaccination on arrival")),
+                              SizedBox(height: 5,),
+                              FadeAnimation(1.2, Text("* You should reach on Time")),
+                              SizedBox(height: 5,),
+                              FadeAnimation(1.2, Text("* Food is not allowed")),
+                              SizedBox(height: 5,),
+                            ],
+                          ),
+                        ),
+                        // child: ListView.builder(
+                        //   scrollDirection: Axis.horizontal,
+                        //   itemCount: _repeat.length,
+                        //   itemBuilder: (context, index) {
+                        //     return GestureDetector(
+                        //       onTap: () {
+                        //         setState(() {
+                        //           _selectedRepeat = index;
+                        //         });
+                        //       },
+                        //       child: FadeAnimation((1.2 + index) / 4, Container(
+                        //         padding: EdgeInsets.symmetric(horizontal: 20),
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(15),
+                        //           color: _selectedRepeat == index ? Colors.blue.shade400 : Colors.grey.shade100,
+                        //         ),
+                        //         margin: EdgeInsets.only(right: 20),
+                        //         child: Center(child: Text(_repeat[index],
+                        //           style: TextStyle(fontSize: 18, color: _selectedRepeat == index ? Colors.white : Colors.grey.shade800),)
+                        //         ),
+                        //       )),
+                        //     );
+                        //   },
+                        // )
+                    ),
+                    // SizedBox(height: 40,),
+                    // FadeAnimation(1.4, Text("Additional Service", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)),
+                    // SizedBox(height: 10,),
+                    // Container(
+                    //     height: 120,
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //       color: Colors.white,
+                    //     ),
+                    //     child: ListView.builder(
+                    //       scrollDirection: Axis.horizontal,
+                    //       itemCount: _exteraCleaning.length,
+                    //       itemBuilder: (context, index) {
+                    //         return GestureDetector(
+                    //             onTap: () {
+                    //               setState(() {
+                    //                 if (_selectedExteraCleaning.contains(index)) {
+                    //                   _selectedExteraCleaning.remove(index);
+                    //                 } else {
+                    //                   _selectedExteraCleaning.add(index);
+                    //                 }
+                    //               });
+                    //             },
+                    //             child: FadeAnimation((1.4 + index) / 4, Container(
+                    //                 width: 110,
+                    //                 decoration: BoxDecoration(
+                    //                   borderRadius: BorderRadius.circular(15),
+                    //                   color: _selectedExteraCleaning.contains(index) ? Colors.blue.shade400 : Colors.transparent,
+                    //                 ),
+                    //                 margin: EdgeInsets.only(right: 20),
+                    //                 child: Column(
+                    //                   mainAxisAlignment: MainAxisAlignment.center,
+                    //                   crossAxisAlignment: CrossAxisAlignment.center,
+                    //                   children: [
+                    //                     Image.network(_exteraCleaning[index][1], height: 40,),
+                    //                     SizedBox(height: 10,),
+                    //                     Text(_exteraCleaning[index][0], style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: _selectedExteraCleaning.contains(index) ? Colors.white : Colors.grey.shade800),),
+                    //                     SizedBox(height: 5,),
+                    //                     Text("+${_exteraCleaning[index][2]}\$", style: TextStyle(color: Colors.black),)
+                    //                   ],
+                    //                 )
+                    //             ))
+                    //         );
                     //       },
-                    //       child: FadeAnimation((1.2 + index) / 4, Container(
-                    //         padding: EdgeInsets.symmetric(horizontal: 20),
-                    //         decoration: BoxDecoration(
-                    //           borderRadius: BorderRadius.circular(15),
-                    //           color: _selectedRepeat == index ? Colors.blue.shade400 : Colors.grey.shade100,
-                    //         ),
-                    //         margin: EdgeInsets.only(right: 20),
-                    //         child: Center(child: Text(_repeat[index],
-                    //           style: TextStyle(fontSize: 18, color: _selectedRepeat == index ? Colors.white : Colors.grey.shade800),)
-                    //         ),
-                    //       )),
-                    //     );
-                    //   },
-                    // )
-                ),
-                // SizedBox(height: 40,),
-                // FadeAnimation(1.4, Text("Additional Service", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)),
-                // SizedBox(height: 10,),
-                // Container(
-                //     height: 120,
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(10),
-                //       color: Colors.white,
-                //     ),
-                //     child: ListView.builder(
-                //       scrollDirection: Axis.horizontal,
-                //       itemCount: _exteraCleaning.length,
-                //       itemBuilder: (context, index) {
-                //         return GestureDetector(
-                //             onTap: () {
-                //               setState(() {
-                //                 if (_selectedExteraCleaning.contains(index)) {
-                //                   _selectedExteraCleaning.remove(index);
-                //                 } else {
-                //                   _selectedExteraCleaning.add(index);
-                //                 }
-                //               });
-                //             },
-                //             child: FadeAnimation((1.4 + index) / 4, Container(
-                //                 width: 110,
-                //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(15),
-                //                   color: _selectedExteraCleaning.contains(index) ? Colors.blue.shade400 : Colors.transparent,
-                //                 ),
-                //                 margin: EdgeInsets.only(right: 20),
-                //                 child: Column(
-                //                   mainAxisAlignment: MainAxisAlignment.center,
-                //                   crossAxisAlignment: CrossAxisAlignment.center,
-                //                   children: [
-                //                     Image.network(_exteraCleaning[index][1], height: 40,),
-                //                     SizedBox(height: 10,),
-                //                     Text(_exteraCleaning[index][0], style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: _selectedExteraCleaning.contains(index) ? Colors.white : Colors.grey.shade800),),
-                //                     SizedBox(height: 5,),
-                //                     Text("+${_exteraCleaning[index][2]}\$", style: TextStyle(color: Colors.black),)
-                //                   ],
-                //                 )
-                //             ))
-                //         );
-                //       },
-                //     )
-                // ),
-              ],
+                    //     )
+                    // ),
+                  ],
             ),
           ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                      child: BottomBtn(context)),
+                ],
+              ),
     )
         // )
     );
+  }
+
+  GestureDetector BottomBtn(BuildContext context) {
+    return GestureDetector(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => EventBooked(),),);},
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: kPrimaryColor
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          "Buy Ticket",
+                          //place.price=="Free"? "Free":"Book Slot",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: isTab(context) ? 25 : 16
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          "3.000 BD",
+                          //place.price=="Free"? "Free":"Book Slot",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: isTab(context) ? 25 : 16
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
   }
 }
 
